@@ -11,8 +11,6 @@
 
 #include <stdint.h>
 
-#define PROJECTOR_COUNT 4
-
 using namespace ofxProCamSolver;
 
 class testApp : public ofBaseApp{

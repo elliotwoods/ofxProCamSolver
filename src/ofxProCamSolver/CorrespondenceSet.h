@@ -1,5 +1,5 @@
 #pragma once
-#include "Correspondence.h"
+#include "ofxProCamSolver/Correspondence.h"
 #include <vector>
 #include <fstream>
 #include <stdint.h>
@@ -8,7 +8,14 @@
 #include "ofFileUtils.h"
 #include "ofSystemUtils.h"
 #include "ofLog.h"
+#include "ofBaseTypes.h"
 
+#define HAVE_OFXGRAYCODE
+
+#ifdef HAVE_OFXGRAYCODE
+#include "ofxGraycode/DataSet.h"
+#include "ofxGraycode/ProjectorPixel.h"
+#endif
 
 namespace ofxProCamSolver {
 
@@ -23,8 +30,12 @@ namespace ofxProCamSolver {
 		
 		void save(string filename="");
 		void load(string filename="");
-
+		
 		set<int> getViewIndices() const; // get a set of indices of all camera/projectors in correspondence set
+
+#ifdef HAVE_OFXGRAYCODE
+		void add(const ofxGraycode::DataSet &dataSet, int cameraIndex, int projectorIndex);
+#endif
 	};
 
 	typedef CorrespondenceSet_<double> CorrespondenceSetd;

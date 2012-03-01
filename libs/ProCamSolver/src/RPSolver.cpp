@@ -10,6 +10,10 @@ namespace ProCamSolver {
 	///////////////////////////////////////////////////////////////////////////////
 	double RPSolver::residual = 0.0;
 
+	/////////////////////////////////////////////////////////////////////////////
+	// set this to false to fix radial distortion of all views to 0.0
+	/////////////////////////////////////////////////////////////////////////////
+	bool RPSolver::radial = true;
 
 	///////////////////////////////////////////////////////////////////////////////
 	//
@@ -180,7 +184,8 @@ namespace ProCamSolver {
 	  int	viewpair;
 	  double e2;
 	  std::map<int, Matrix<double> > R;
-
+	  coord  dt(3);
+	  
 	  params_to_vpmatrices(p);
 	  e2 = 0.0;
 	  for(n=0; n<C.size(); ++n) {
@@ -188,9 +193,13 @@ namespace ProCamSolver {
 		if(R.find(viewpair) == R.end()) {
 		  RadialViewProjectionMatrix &	pi((*this)[C[n].i]);
 		  RadialViewProjectionMatrix &	pj((*this)[C[n].j]);
+		  dt = pj.t - pi.t; // normalise the translation scale
+		  dt /= sqrt((dt*dt).sum());
 		  R[viewpair] = 
-		pj.DT()*pj.M1T()*pj.R()*(pj.T() - pi.T())*pi.R1()*pi.M1()*pi.D();
-		}
+	            pj.DT()*pj.M1T()*pj.R()*
+                    transformMatrix(cross_prod,dt[0],dt[1],dt[2])
+                    *pi.R1()*pi.M1()*pi.D();
+                }
 		e2 += correspondence_error(C[n], R[viewpair]);
 	  }
 
@@ -202,7 +211,6 @@ namespace ProCamSolver {
   
 	  k = 0.0;
 	  for(view = begin(); view != end(); ++view) {
-		n  = paramBase[id(view)];
 		k += (vpmat(view).t * vpmat(view).t).sum();
 	  }
 	  k -= 1.0;
@@ -270,7 +278,7 @@ namespace ProCamSolver {
 		  vpmat(view).cy 	= p[i+3];
 		  i += 4;
 		}
-		vpmat(view).d = p[i];
+		if(radial) vpmat(view).d = p[i];
 		++i;
 	  }
 	}
@@ -305,7 +313,7 @@ namespace ProCamSolver {
 		  p[i+3] = vpmat(view).cy;
 		  i += 4;
 		}
-		p[i] = vpmat(view).d;	// radial distortion
+		if(radial) p[i] = vpmat(view).d;	// radial distortion
 		++i;
 	  }
 	}

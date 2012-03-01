@@ -92,5 +92,6 @@ namespace ProCamSolver {
 	  std::set<int>			paramMask; // which views have fixed intrinsics
 	  int				pn;	   // parameter count
 	  static double			residual;  // residual of fit
+	  static bool			radial;    // radial distortion on/off
 	};
 }

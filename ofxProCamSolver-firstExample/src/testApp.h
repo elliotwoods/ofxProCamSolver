@@ -16,6 +16,7 @@
 #include <stdint.h>
 
 #define PROJECTOR_COUNT 5
+#define BLOCK_COUNT 400
 
 using namespace ofxProCamSolver;
 

@@ -21,6 +21,9 @@
     <ClInclude Include="..\src\ofxProCamSolver\CorrespondenceSet.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ofxGraycode\ofxGraycodeLib\ofxGraycodeLib.vcxproj">
+      <Project>{8257a221-2ee7-44ea-bd9e-558c3d7426c5}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\libs\ProCamSolver\ProCamSolver.vcxproj">
       <Project>{aecec370-f33e-42ef-86f3-1d6cc0c2bc4c}</Project>
     </ProjectReference>
@@ -60,7 +63,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\libs\ProCamSolver\include;..\..\..\addons\ofxProCamSolver\src;..\..\..\libs\openFrameworks\math;..\..\..\libs\openFrameworks\utils;..\..\..\libs\glew\include;..\..\..\libs\glu\include;..\..\..\libs\tess2\include;..\..\..\libs\cairo\include\cairo;..\..\..\addons\ofxPFM\src\;..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\video;..\..\..\libs\openFrameworks\types;..\..\..\libs\openFrameworks\events;..\..\..\libs\glut\include;..\..\..\libs\rtAudio\include;..\..\..\libs\quicktime\include;..\..\..\libs\freetype\include;..\..\..\libs\freetype\include\freetype2;..\..\..\libs\freeImage\include;..\..\..\libs\fmodex\include;..\..\..\libs\videoInput\include;..\..\..\libs\glew\include\;..\..\..\libs\poco\include;..\..\..\addons;..\..\..\libs\openFrameworks\gl;..\..\..\libs\openFrameworks\3d;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\addons\ofxGraycode\src;..\libs\ProCamSolver\include;..\..\..\addons\ofxProCamSolver\src;..\..\..\libs\openFrameworks\math;..\..\..\libs\openFrameworks\utils;..\..\..\libs\glew\include;..\..\..\libs\glu\include;..\..\..\libs\tess2\include;..\..\..\libs\cairo\include\cairo;..\..\..\addons\ofxPFM\src\;..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\video;..\..\..\libs\openFrameworks\types;..\..\..\libs\openFrameworks\events;..\..\..\libs\glut\include;..\..\..\libs\rtAudio\include;..\..\..\libs\quicktime\include;..\..\..\libs\freetype\include;..\..\..\libs\freetype\include\freetype2;..\..\..\libs\freeImage\include;..\..\..\libs\fmodex\include;..\..\..\libs\videoInput\include;..\..\..\libs\glew\include\;..\..\..\libs\poco\include;..\..\..\addons;..\..\..\libs\openFrameworks\gl;..\..\..\libs\openFrameworks\3d;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -77,7 +80,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>..\libs\ProCamSolver\include;..\..\..\addons\ofxProCamSolver\src;..\..\..\libs\openFrameworks\math;..\..\..\libs\openFrameworks\utils;..\..\..\libs\glew\include;..\..\..\libs\glu\include;..\..\..\libs\tess2\include;..\..\..\libs\cairo\include\cairo;..\..\..\addons\ofxPFM\src\;..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\video;..\..\..\libs\openFrameworks\types;..\..\..\libs\openFrameworks\events;..\..\..\libs\glut\include;..\..\..\libs\rtAudio\include;..\..\..\libs\quicktime\include;..\..\..\libs\freetype\include;..\..\..\libs\freetype\include\freetype2;..\..\..\libs\freeImage\include;..\..\..\libs\fmodex\include;..\..\..\libs\videoInput\include;..\..\..\libs\glew\include\;..\..\..\libs\poco\include;..\..\..\addons;..\..\..\libs\openFrameworks\gl;..\..\..\libs\openFrameworks\3d;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\addons\ofxGraycode\src;..\libs\ProCamSolver\include;..\..\..\addons\ofxProCamSolver\src;..\..\..\libs\openFrameworks\math;..\..\..\libs\openFrameworks\utils;..\..\..\libs\glew\include;..\..\..\libs\glu\include;..\..\..\libs\tess2\include;..\..\..\libs\cairo\include\cairo;..\..\..\addons\ofxPFM\src\;..\..\..\libs\openFrameworks;..\..\..\libs\openFrameworks\graphics;..\..\..\libs\openFrameworks\app;..\..\..\libs\openFrameworks\sound;..\..\..\libs\openFrameworks\communication;..\..\..\libs\openFrameworks\video;..\..\..\libs\openFrameworks\types;..\..\..\libs\openFrameworks\events;..\..\..\libs\glut\include;..\..\..\libs\rtAudio\include;..\..\..\libs\quicktime\include;..\..\..\libs\freetype\include;..\..\..\libs\freetype\include\freetype2;..\..\..\libs\freeImage\include;..\..\..\libs\fmodex\include;..\..\..\libs\videoInput\include;..\..\..\libs\glew\include\;..\..\..\libs\poco\include;..\..\..\addons;..\..\..\libs\openFrameworks\gl;..\..\..\libs\openFrameworks\3d;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

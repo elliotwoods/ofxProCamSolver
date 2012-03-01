@@ -28,7 +28,7 @@ void testApp::setup(){
 	const ofVec2f blockSize(0.02f, 0.05f);
 	const int pointsPerBlockXY = 4;
 	const ofVec2f blockSizeStep = blockSize / pointsPerBlockXY;
-	const int blocks = 1000;
+	const int blocks = BLOCK_COUNT;
 	ofVec3f block;
 	dataPoints.clear();
 	for (int i=0; i<blocks; i++) {
