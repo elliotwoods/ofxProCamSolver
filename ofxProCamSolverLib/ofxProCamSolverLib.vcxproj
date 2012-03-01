@@ -21,9 +21,6 @@
     <ClInclude Include="..\src\ofxProCamSolver\CorrespondenceSet.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ofxRay\ofxRayLib\ofxRayLib.vcxproj">
-      <Project>{496d5373-81c2-474d-9f83-772d02637548}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\libs\ProCamSolver\ProCamSolver.vcxproj">
       <Project>{aecec370-f33e-42ef-86f3-1d6cc0c2bc4c}</Project>
     </ProjectReference>

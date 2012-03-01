@@ -49,6 +49,21 @@ namespace ofxProCamSolver {
 			file.read((char*)&(*it), sizeof(Correspondence_<T>));
 	}
 
+	//---------
+	template<typename T>
+	set<int> CorrespondenceSet_<T>::getViewIndices() const {
+		set<int> indices;
+		CorrespondenceSet_<T>::const_iterator it;
+		for (it = this->begin(); it != this->end(); it++) {
+			if (indices.count(it->cameraID1) == 0)
+				indices.insert(it->cameraID1);
+			if (indices.count(it->cameraID2) == 0)
+				indices.insert(it->cameraID2);
+		}
+
+		return indices;
+	}
+
 	template class CorrespondenceSet_<double>;
 	template class CorrespondenceSet_<float>;
 }

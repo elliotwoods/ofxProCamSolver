@@ -23,6 +23,9 @@ namespace ofxProCamSolver {
 
 		Correspondence_(int cameraID1, const ofVec2f& xy1, int cameraID2, const ofVec2f& xy2);
 
+		ofVec2f getXY1() const;
+		ofVec2f getXY2() const;
+
 		////
 		//data
 		////

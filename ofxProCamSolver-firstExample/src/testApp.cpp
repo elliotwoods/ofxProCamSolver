@@ -157,17 +157,13 @@ void testApp::updateProjector()	{
 		projector[i].setWidth(this->resolution.x);
 		projector[i].setHeight(this->resolution.y);
 		projector[i].setProjection(this->throwRatio, this->lensOffset);
-		projector[i].setPosition(this->position + ofVec3f(ofMap(i, 0, PROJECTOR_COUNT, -2.0f, 2.0f), 0,0));
-		//projector[i].lookAt(ofVec3f(0,0,0));
+		projector[i].setPosition(this->position + ofVec3f(ofMap(i, 0, PROJECTOR_COUNT, -2.0f, 2.0f), -(i % 2),0));
+		projector[i].lookAt(ofVec3f(0,0,0));
 	}
 }
 
 //--------------------------------------------------------------
 void testApp::solve() {
-	for (int i=0; i<PROJECTOR_COUNT; i++) {
-		cout << "Projector " << i << endl;
-		cout << projector[i].getViewProjectionMatrix() << endl << endl;
-	}
 	this->makeCorrespondences();
 	ofxProCamSolver::Solver solver;
 	solver.solve(this->correspondences);
@@ -179,22 +175,38 @@ void testApp::makeCorrespondences() {
 
 	correspondences.clear();
 	const ofVec3f *point = dataPoints.getVerticesPointer();
-	ofVec2f* xy = new ofVec2f[PROJECTOR_COUNT];
+	ofVec3f* xy = new ofVec3f[PROJECTOR_COUNT];
 
 	ofRectangle bounds(-1,-1,2,2);
+	ofVec4f projected;
 	for (int i=0; i<count; i++, point++) {
-		for (int j=0; j<PROJECTOR_COUNT; j++)
-			xy[j] = projector[j].getViewProjectionMatrix() * *point;
+		for (int j=0; j<PROJECTOR_COUNT; j++) {
+			projected = projector[j].getViewProjectionMatrix() * ofVec4f(*point);
+			xy[j] = ofVec3f(projected.x, projected.y, projected.z) / projected.w;
+		}
 
 		for (int j=0; j<PROJECTOR_COUNT; j++)
 			for (int k=j+1; k<PROJECTOR_COUNT; k++)
-				if (bounds.inside(xy[j]) && bounds.inside(xy[k]))
-					if (ofRandom(1.0f) > 0.7)
-						correspondences.push_back((Correspondenced)Correspondencef(j, xy[j], k, xy[k]));
+				if (bounds.inside(xy[j]) && bounds.inside(xy[k]) && xy[j].z < 0 && xy[k].z < 0)
+					correspondences.push_back((Correspondenced)Correspondencef(j, xy[j], k, xy[k]));
 	}
 
 	delete[] xy;
 
+	for (int i=0; i<PROJECTOR_COUNT; i++) {
+		cout << "--'----------" << endl;
+		cout << "Projector " << i << endl << endl;
+		cout << "view:" << endl;
+		cout << projector[i].getViewMatrix() << endl << endl;
+		cout << "projection:" << endl;
+		cout << projector[i].getProjectionMatrix() << endl << endl;
+		cout << "viewprojection:" << endl;
+		cout << projector[i].getViewProjectionMatrix() << endl << endl;
+		cout << "translation:" << endl;
+		cout << projector[i].getPosition() << endl << endl;
+		cout << "rotation:" << endl;
+		cout << projector[i].getOrientationEuler() << endl << endl;
+	}
 }
 //--------------------------------------------------------------
 void testApp::saveCorrespondences() {
@@ -203,17 +215,9 @@ void testApp::saveCorrespondences() {
 	uint32_t count = correspondences.size();
 
 	ofstream fileOut;
-	fileOut.open(ofToDataPath("correspondences"), ios::binary);
+	string filename = ofSystemSaveDialog("correspondences", "Save correspondences table").getPath();
+	fileOut.open(ofToDataPath(filename), ios::binary);
 	fileOut.write((char*)&count, sizeof(uint32_t));
 	fileOut.write((char*)&correspondences[0], sizeof(Correspondenced) * count);
 	fileOut.close();
-
-	for (int i=0; i<PROJECTOR_COUNT; i++) {
-		cout << "--------" << endl;
-		cout << "Camera " << i << endl;
-		cout << "--------" << endl;
-		cout << projector[i].getViewProjectionMatrix() << endl;
-		cout << "--------" << endl;
-		cout << endl;
-	}
 }

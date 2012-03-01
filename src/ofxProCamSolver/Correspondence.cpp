@@ -19,6 +19,16 @@ namespace ofxProCamSolver {
 
 		this->weight = 0.0;
 	}
+	
+	template<typename T>
+	ofVec2f Correspondence_<T>::getXY1() const {
+		return ofVec2f(xy1[0], xy1[1]);
+	}
+
+	template<typename T>
+	ofVec2f Correspondence_<T>::getXY2() const {
+		return ofVec2f(xy2[0], xy2[1]);
+	}
 
 	template class Correspondence_<float>;
 	template class Correspondence_<double>;
