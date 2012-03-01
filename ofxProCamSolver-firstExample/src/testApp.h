@@ -15,7 +15,7 @@
 
 #include <stdint.h>
 
-#define PROJECTOR_COUNT 3
+#define PROJECTOR_COUNT 5
 
 using namespace ofxProCamSolver;
 

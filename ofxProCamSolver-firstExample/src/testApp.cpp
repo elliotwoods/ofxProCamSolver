@@ -17,7 +17,7 @@ void testApp::setup(){
 	data.insert(pair<string, float&>("lensOffset.y", lensOffset.y));
 	dataCursor = data.begin();
 	
-	position = ofVec3f(1.0f, 0.0f, 3.0f);
+	position = ofVec3f(0.0f, 0.0f, 3.0f);
 	resolution = ofVec2f(1024, 768);
 	throwRatio = 2.0f;
 	lensOffset = ofVec2f(0.0f, 0.5f);
@@ -158,7 +158,7 @@ void testApp::updateProjector()	{
 		projector[i].setHeight(this->resolution.y);
 		projector[i].setProjection(this->throwRatio, this->lensOffset);
 		projector[i].setPosition(this->position + ofVec3f(ofMap(i, 0, PROJECTOR_COUNT, -2.0f, 2.0f), -(i % 2),0));
-		projector[i].lookAt(ofVec3f(0,0,0));
+		//projector[i].lookAt(ofVec3f(0,0,0));
 	}
 }
 
